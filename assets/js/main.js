@@ -3,7 +3,8 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-let flg_end = false,
+let flg_end_hide = false,
+  flg_end_show
   ang_arr = [],
   end_arr = [],
   letter_array = [],
@@ -38,8 +39,8 @@ const create_animation_hide = (obj, word, letter, ed_op) => {
     speed = main_speed + Math.random() * 1.2,
     tm = Math.abs(step / speed);
   ang_arr[word][letter] = step + ang_arr[word][letter];
-  if (flg_end) ang_arr[word][letter] = 0;
-  if (flg_end){
+  if (flg_end_hide) ang_arr[word][letter] = 0;
+  if (flg_end_hide){
     $(obj).animate(
       {
         transform: "rotateY(" + ang_arr[word][letter] + "deg)",
@@ -64,11 +65,24 @@ const create_animation_hide = (obj, word, letter, ed_op) => {
     );
   }  
 };
-const create_animation_show = (obj, word, letter) => {
+const create_animation_show = (obj, word, letter,n_op) => {
   let step = Math.floor(Math.random() * 360) - 360.0,
     speed = main_speed + Math.random() * 1.2,
     tm = Math.abs(step / speed);
   ang_arr[word][letter] = step + ang_arr[word][letter];
+  if(flg_end_show && (letter == (letter_array[word].length - 1) || end_arr[word][letter+1])){
+    ang_arr[word][letter] = 360 * Math.floor((ang_arr[word][letter] + 359)/360);
+    n_op = 1.0;
+
+  }else{
+    n_op = Math.min(n_op + 0.07,1.0);
+    $(obj).animate({
+      transform : "rotateY(" + ang_arr[word][letter] + "deg)",
+      opacity : 
+    },tm,function(){
+      create_animation_show(obj,word,letter,n_op);
+    });
+  }
 };
 const hide_letters = () => {
   create_animation_hide(
@@ -87,8 +101,7 @@ const show_letters = () => {
   create_animation_show(
     letter_array[now_words_show][now_letter_show],
     now_words,
-    now_letter++,
-    0.0
+    letter_array[now_words_show].length - 1 - now_letter++
   );
   if (now_letter < letter_array[now_words_show].length) {
     setTimeout(() => {
