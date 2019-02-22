@@ -13,10 +13,10 @@ let flg_end_hide = false,
   now_words_show = 0,
   now_letter_hide = 0,
   now_letter_show = 0,
-  main_speed = 0.3,
+  main_speed = 0.5,
   step_speed = 1.2,
-  min_ang = 40,
-  max_ang = 150;
+  min_ang = 30,
+  max_ang = 80;
 let arr_words = [
   "Advertising*Agency",
   "ROI *Focused",
@@ -62,7 +62,7 @@ const create_animation_hide = (obj, word, ang, n_op, letter) => {
       }
     );
   } else {
-    if (flg_start_hide) n_op = Math.max(0.0, n_op - 0.1);
+    if (flg_start_hide) n_op = Math.max(0.0, n_op - 0.05);
     // console.log("hide", word, letter, n_op);
     $(obj).animate(
       {
@@ -115,7 +115,7 @@ const create_animation_show = (obj, word, ang, n_op, letter) => {
       }
     );
   } else {
-    n_op = Math.min(n_op + 0.1, 1.0);
+    n_op = Math.min(n_op + 0.08, 1.0);
     if (flg_end_show) tm = 80;
     $(obj).animate(
       {
