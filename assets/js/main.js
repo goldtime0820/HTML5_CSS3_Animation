@@ -36,7 +36,7 @@ const create_animation_hide = (obj, word, ang, n_op, letter) => {
     n_op = 0.99;
     flg_start_show = true;
   }
-  if (flg_start_show) n_op = Math.min(n_op, 0.8);
+  if (flg_start_show) n_op = Math.min(n_op, 0.9);
 
   if (n_op == 0) {
     flg_end_hide = true;
@@ -56,7 +56,7 @@ const create_animation_hide = (obj, word, ang, n_op, letter) => {
       }
     );
   } else {
-    if (flg_start_hide) n_op = Math.max(0.0, n_op - 0.05);
+    if (flg_start_hide) n_op = Math.max(0.0, n_op - 0.04);
     // console.log("hide", word, letter, n_op);
     $(obj).animate(
       {
@@ -110,7 +110,7 @@ const create_animation_show = (obj, word, ang, n_op, letter) => {
     );
   } else {
     n_op = Math.min(n_op + 0.08, 1.0);
-    if (flg_end_show) tm = 80;
+    //if (flg_end_show) tm = 80;
     $(obj).animate(
       {
         transform: "rotateY(" + ang + "deg)",
