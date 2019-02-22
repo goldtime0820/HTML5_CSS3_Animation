@@ -17,13 +17,7 @@ let flg_end_hide = false,
   step_speed = 1.2,
   min_ang = 30,
   max_ang = 80;
-let arr_words = [
-  "Advertising*Agency",
-  "ROI *Focused",
-  "Proactive &*Transparent",
-  "Digital*Marketeers",
-  "Cool *Nerds"
-];
+
 
 const get_random_range = (a, b) => {
   let ret = a + Math.floor(Math.random() * (b - a));
